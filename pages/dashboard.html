@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar will be loaded here via JavaScript -->
+        <div id="sidebar-container"></div>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm...">
+                </div>
+                <div class="header-right">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="date-time">
+                        <span id="current-date">Thứ 2, 01/01/2023</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <h1 class="page-title">Dashboard</h1>
+                
+                <div class="stats-container">
+                    <div class="stats-card">
+                        <div class="stats-icon employee-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Tổng nhân viên</h3>
+                            <p>124</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon new-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Nhân viên mới</h3>
+                            <p>8</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon exit-icon">
+                            <i class="fas fa-user-minus"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Đã nghỉ việc</h3>
+                            <p>3</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon dept-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Phòng ban</h3>
+                            <p>7</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-row">
+                    <div class="chart-container">
+                        <h2>Biểu đồ nhân sự theo phòng ban</h2>
+                        <canvas id="department-chart"></canvas>
+                    </div>
+                    
+                    <div class="notifications-container">
+                        <h2>Thông báo mới nhất</h2>
+                        <div class="notification-list">
+                            <div class="notification-item">
+                                <div class="notification-icon urgent">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Cập nhật hồ sơ nhân viên</h4>
+                                    <p>5 hồ sơ nhân viên cần cập nhật thông tin CMND mới</p>
+                                    <span class="notification-time">1 giờ trước</span>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Ứng viên mới</h4>
+                                    <p>3 ứng viên mới cho vị trí Kế toán</p>
+                                    <span class="notification-time">3 giờ trước</span>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-icon">
+                                    <i class="fas fa-birthday-cake"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Sinh nhật tháng này</h4>
+                                    <p>8 nhân viên có sinh nhật trong tháng này</p>
+                                    <span class="notification-time">1 ngày trước</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-access">
+                    <h2>Truy cập nhanh</h2>
+                    <div class="quick-access-cards">
+                        <a href="employees.html" class="quick-card">
+                            <i class="fas fa-users"></i>
+                            <span>Quản lý nhân viên</span>
+                        </a>
+                        <a href="candidates.html" class="quick-card">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Quản lý tuyển dụng</span>
+                        </a>
+                        <a href="reports.html" class="quick-card">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Báo cáo thống kê</span>
+                        </a>
+                        <a href="#" class="quick-card">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Mẫu biểu, hợp đồng</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sidebar-loader.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html> 

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar will be loaded here via JavaScript -->
+        <div id="sidebar-container"></div>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm cài đặt...">
+                </div>
+                <div class="header-right">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="date-time">
+                        <span id="current-date">Thứ 2, 01/01/2023</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="settings-content">
+                <div class="page-header">
+                    <h1 class="page-title">Cài đặt hệ thống</h1>
+                    <button class="btn primary-btn" id="save-settings-btn">
+                        <i class="fas fa-save"></i> Lưu thay đổi
+                    </button>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-sidebar">
+                        <div class="settings-menu">
+                            <button class="settings-menu-item active" data-tab="general">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Cài đặt chung</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="profile">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Thông tin cá nhân</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="appearance">
+                                <i class="fas fa-palette"></i>
+                                <span>Giao diện</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="notifications">
+                                <i class="fas fa-bell"></i>
+                                <span>Thông báo</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="security">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Bảo mật</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="language">
+                                <i class="fas fa-language"></i>
+                                <span>Ngôn ngữ</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="company">
+                                <i class="fas fa-building"></i>
+                                <span>Thông tin công ty</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="integrations">
+                                <i class="fas fa-plug"></i>
+                                <span>Tích hợp</span>
+                            </button>
+                            <button class="settings-menu-item" data-tab="backup">
+                                <i class="fas fa-database"></i>
+                                <span>Sao lưu & Phục hồi</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-content-area">
+                        <div class="settings-tab active" id="general">
+                            <h2 class="settings-section-title">Cài đặt chung</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Hiển thị</h3>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Số mục hiển thị mỗi trang</label>
+                                    <select class="settings-select">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Định dạng ngày tháng</label>
+                                    <select class="settings-select">
+                                        <option value="dd/mm/yyyy">DD/MM/YYYY</option>
+                                        <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                        <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                    </select>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Múi giờ</label>
+                                    <select class="settings-select">
+                                        <option value="gmt+7">(GMT+07:00) Hà Nội, Bangkok</option>
+                                        <option value="gmt+8">(GMT+08:00) Bắc Kinh, Singapore</option>
+                                        <option value="gmt+9">(GMT+09:00) Tokyo, Seoul</option>
+                                        <option value="gmt-8">(GMT-08:00) Los Angeles, Vancouver</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Thông báo</h3>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Thông báo email</label>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Thông báo trên trình duyệt</label>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Âm thanh thông báo</label>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="profile">
+                            <h2 class="settings-section-title">Thông tin cá nhân</h2>
+                            
+                            <div class="settings-card">
+                                <div class="profile-header">
+                                    <div class="profile-avatar-container">
+                                        <img src="../img/avatar.png" alt="User Avatar" class="profile-avatar">
+                                        <div class="profile-avatar-overlay">
+                                            <i class="fas fa-camera"></i>
+                                            <span>Thay đổi</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info">
+                                        <h3>Nguyễn Văn Admin</h3>
+                                        <p>Quản trị viên</p>
+                                    </div>
+                                </div>
+
+                                <div class="profile-form">
+                                    <div class="settings-form-row">
+                                        <div class="settings-form-group">
+                                            <label class="settings-label">Họ và tên</label>
+                                            <input type="text" class="settings-input" value="Nguyễn Văn Admin">
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label class="settings-label">Email</label>
+                                            <input type="email" class="settings-input" value="admin@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="settings-form-row">
+                                        <div class="settings-form-group">
+                                            <label class="settings-label">Số điện thoại</label>
+                                            <input type="tel" class="settings-input" value="0901234567">
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label class="settings-label">Chức danh</label>
+                                            <input type="text" class="settings-input" value="Quản trị viên">
+                                        </div>
+                                    </div>
+                                    <div class="settings-form-group">
+                                        <label class="settings-label">Địa chỉ</label>
+                                        <textarea class="settings-textarea">Số 123, Đường ABC, Quận XYZ, TP. Hồ Chí Minh</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="appearance">
+                            <h2 class="settings-section-title">Giao diện</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Chủ đề</h3>
+                                <div class="theme-options">
+                                    <div class="theme-option active">
+                                        <div class="theme-preview light-theme"></div>
+                                        <span>Sáng</span>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-preview dark-theme"></div>
+                                        <span>Tối</span>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-preview system-theme"></div>
+                                        <span>Theo hệ thống</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Màu chủ đạo</h3>
+                                <div class="color-options">
+                                    <div class="color-option active" style="--color: #2563eb;">
+                                        <div class="color-preview"></div>
+                                    </div>
+                                    <div class="color-option" style="--color: #059669;">
+                                        <div class="color-preview"></div>
+                                    </div>
+                                    <div class="color-option" style="--color: #7c3aed;">
+                                        <div class="color-preview"></div>
+                                    </div>
+                                    <div class="color-option" style="--color: #db2777;">
+                                        <div class="color-preview"></div>
+                                    </div>
+                                    <div class="color-option" style="--color: #ea580c;">
+                                        <div class="color-preview"></div>
+                                    </div>
+                                    <div class="color-option" style="--color: #475569;">
+                                        <div class="color-preview"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Bố cục</h3>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Thu gọn menu bên trái</label>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Thanh công cụ cố định</label>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Hiệu ứng chuyển động</label>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="security">
+                            <h2 class="settings-section-title">Bảo mật</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Thay đổi mật khẩu</h3>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Mật khẩu hiện tại</label>
+                                    <input type="password" class="settings-input">
+                                </div>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Mật khẩu mới</label>
+                                    <input type="password" class="settings-input">
+                                </div>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Xác nhận mật khẩu mới</label>
+                                    <input type="password" class="settings-input">
+                                </div>
+                                <button class="btn primary-btn">Cập nhật mật khẩu</button>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Xác thực hai yếu tố</h3>
+                                <p class="settings-description">
+                                    Kích hoạt xác thực hai yếu tố để tăng cường bảo mật cho tài khoản của bạn.
+                                </p>
+                                <div class="settings-form-group switch-group">
+                                    <label class="settings-label">Xác thực hai yếu tố</label>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <button class="btn secondary-btn" disabled>Thiết lập</button>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Phiên đăng nhập</h3>
+                                <p class="settings-description">
+                                    Thiết bị và vị trí đã đăng nhập vào tài khoản của bạn.
+                                </p>
+                                <div class="session-list">
+                                    <div class="session-item current">
+                                        <div class="session-info">
+                                            <i class="fas fa-desktop"></i>
+                                            <div>
+                                                <strong>Windows - Chrome</strong>
+                                                <p>TP. Hồ Chí Minh, Việt Nam - Hiện tại</p>
+                                            </div>
+                                        </div>
+                                        <span class="current-badge">Hiện tại</span>
+                                    </div>
+                                    <div class="session-item">
+                                        <div class="session-info">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <div>
+                                                <strong>iPhone - Safari</strong>
+                                                <p>TP. Hồ Chí Minh, Việt Nam - 2 giờ trước</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn danger-btn compact-btn">Đăng xuất</button>
+                                    </div>
+                                </div>
+                                <button class="btn danger-outline-btn">Đăng xuất khỏi tất cả các thiết bị khác</button>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="company">
+                            <h2 class="settings-section-title">Thông tin công ty</h2>
+                            
+                            <div class="settings-card">
+                                <div class="company-logo-container">
+                                    <img src="../img/logo.png" alt="Company Logo" class="company-logo">
+                                    <div class="company-logo-overlay">
+                                        <i class="fas fa-camera"></i>
+                                        <span>Thay đổi</span>
+                                    </div>
+                                </div>
+
+                                <div class="settings-form-row">
+                                    <div class="settings-form-group">
+                                        <label class="settings-label">Tên công ty</label>
+                                        <input type="text" class="settings-input" value="Công ty ABC">
+                                    </div>
+                                    <div class="settings-form-group">
+                                        <label class="settings-label">Mã số thuế</label>
+                                        <input type="text" class="settings-input" value="0123456789">
+                                    </div>
+                                </div>
+                                <div class="settings-form-row">
+                                    <div class="settings-form-group">
+                                        <label class="settings-label">Email liên hệ</label>
+                                        <input type="email" class="settings-input" value="contact@company.com">
+                                    </div>
+                                    <div class="settings-form-group">
+                                        <label class="settings-label">Số điện thoại</label>
+                                        <input type="tel" class="settings-input" value="(028) 1234 5678">
+                                    </div>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Địa chỉ</label>
+                                    <textarea class="settings-textarea">Số 456, Đường XYZ, Quận ABC, TP. Hồ Chí Minh</textarea>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label class="settings-label">Giới thiệu</label>
+                                    <textarea class="settings-textarea">Công ty chúng tôi chuyên cung cấp các giải pháp phần mềm quản lý doanh nghiệp hiện đại và hiệu quả.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="language">
+                            <h2 class="settings-section-title">Ngôn ngữ</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Ngôn ngữ hiển thị</h3>
+                                <div class="language-options">
+                                    <div class="language-option active">
+                                        <img src="../img/flags/vn.png" alt="Việt Nam" class="language-flag">
+                                        <div class="language-info">
+                                            <span class="language-name">Tiếng Việt</span>
+                                            <span class="language-region">Việt Nam</span>
+                                        </div>
+                                    </div>
+                                    <div class="language-option">
+                                        <img src="../img/flags/en.png" alt="English" class="language-flag">
+                                        <div class="language-info">
+                                            <span class="language-name">English</span>
+                                            <span class="language-region">United States</span>
+                                        </div>
+                                    </div>
+                                    <div class="language-option">
+                                        <img src="../img/flags/jp.png" alt="日本語" class="language-flag">
+                                        <div class="language-info">
+                                            <span class="language-name">日本語</span>
+                                            <span class="language-region">日本</span>
+                                        </div>
+                                    </div>
+                                    <div class="language-option">
+                                        <img src="../img/flags/kr.png" alt="한국어" class="language-flag">
+                                        <div class="language-info">
+                                            <span class="language-name">한국어</span>
+                                            <span class="language-region">대한민국</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="notifications">
+                            <h2 class="settings-section-title">Thông báo</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Cài đặt thông báo</h3>
+                                
+                                <div class="notification-group">
+                                    <h4 class="notification-group-title">Hệ thống</h4>
+                                    <div class="notification-setting">
+                                        <div class="notification-info">
+                                            <span class="notification-name">Cập nhật hệ thống</span>
+                                            <span class="notification-description">Thông báo khi có phiên bản mới</span>
+                                        </div>
+                                        <div class="notification-channels">
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-envelope"></i></span>
+                                            </label>
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-bell"></i></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="notification-setting">
+                                        <div class="notification-info">
+                                            <span class="notification-name">Bảo trì hệ thống</span>
+                                            <span class="notification-description">Thông báo khi hệ thống bảo trì</span>
+                                        </div>
+                                        <div class="notification-channels">
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-envelope"></i></span>
+                                            </label>
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-bell"></i></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="notification-group">
+                                    <h4 class="notification-group-title">Nhân viên</h4>
+                                    <div class="notification-setting">
+                                        <div class="notification-info">
+                                            <span class="notification-name">Nhân viên mới</span>
+                                            <span class="notification-description">Thông báo khi có nhân viên mới</span>
+                                        </div>
+                                        <div class="notification-channels">
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-envelope"></i></span>
+                                            </label>
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-bell"></i></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="notification-setting">
+                                        <div class="notification-info">
+                                            <span class="notification-name">Cập nhật thông tin</span>
+                                            <span class="notification-description">Thông báo khi thông tin nhân viên được cập nhật</span>
+                                        </div>
+                                        <div class="notification-channels">
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox">
+                                                <span class="channel-icon"><i class="fas fa-envelope"></i></span>
+                                            </label>
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-bell"></i></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="notification-group">
+                                    <h4 class="notification-group-title">Tuyển dụng</h4>
+                                    <div class="notification-setting">
+                                        <div class="notification-info">
+                                            <span class="notification-name">Ứng viên mới</span>
+                                            <span class="notification-description">Thông báo khi có ứng viên mới</span>
+                                        </div>
+                                        <div class="notification-channels">
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-envelope"></i></span>
+                                            </label>
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-bell"></i></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="notification-setting">
+                                        <div class="notification-info">
+                                            <span class="notification-name">Lịch phỏng vấn</span>
+                                            <span class="notification-description">Thông báo khi có lịch phỏng vấn mới</span>
+                                        </div>
+                                        <div class="notification-channels">
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-envelope"></i></span>
+                                            </label>
+                                            <label class="channel-checkbox">
+                                                <input type="checkbox" checked>
+                                                <span class="channel-icon"><i class="fas fa-bell"></i></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="integrations">
+                            <h2 class="settings-section-title">Tích hợp</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Tích hợp dịch vụ</h3>
+                                
+                                <div class="integration-list">
+                                    <div class="integration-item">
+                                        <div class="integration-logo">
+                                            <img src="../img/integrations/google.png" alt="Google">
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Google Workspace</h4>
+                                            <p>Tích hợp với Google Calendar, Gmail và Google Drive</p>
+                                        </div>
+                                        <button class="btn primary-btn compact-btn connected-btn">
+                                            <i class="fas fa-check"></i> Đã kết nối
+                                        </button>
+                                    </div>
+                                    <div class="integration-item">
+                                        <div class="integration-logo">
+                                            <img src="../img/integrations/slack.png" alt="Slack">
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Slack</h4>
+                                            <p>Nhận thông báo và cập nhật qua Slack</p>
+                                        </div>
+                                        <button class="btn secondary-btn compact-btn">
+                                            Kết nối
+                                        </button>
+                                    </div>
+                                    <div class="integration-item">
+                                        <div class="integration-logo">
+                                            <img src="../img/integrations/microsoft.png" alt="Microsoft">
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Microsoft 365</h4>
+                                            <p>Tích hợp với Outlook, OneDrive và Teams</p>
+                                        </div>
+                                        <button class="btn secondary-btn compact-btn">
+                                            Kết nối
+                                        </button>
+                                    </div>
+                                    <div class="integration-item">
+                                        <div class="integration-logo">
+                                            <img src="../img/integrations/dropbox.png" alt="Dropbox">
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Dropbox</h4>
+                                            <p>Lưu trữ và chia sẻ tài liệu qua Dropbox</p>
+                                        </div>
+                                        <button class="btn secondary-btn compact-btn">
+                                            Kết nối
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-tab" id="backup">
+                            <h2 class="settings-section-title">Sao lưu & Phục hồi</h2>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Sao lưu dữ liệu</h3>
+                                <p class="settings-description">
+                                    Tạo bản sao lưu của dữ liệu hệ thống để đảm bảo an toàn và có thể phục hồi khi cần thiết.
+                                </p>
+                                <div class="backup-actions">
+                                    <button class="btn primary-btn">
+                                        <i class="fas fa-download"></i> Tạo bản sao lưu mới
+                                    </button>
+                                    <div class="backup-schedule">
+                                        <label class="settings-label">Tự động sao lưu</label>
+                                        <select class="settings-select compact">
+                                            <option value="daily">Hàng ngày</option>
+                                            <option value="weekly" selected>Hàng tuần</option>
+                                            <option value="monthly">Hàng tháng</option>
+                                            <option value="never">Không bao giờ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <h4 class="backup-history-title">Lịch sử sao lưu</h4>
+                                <div class="backup-history">
+                                    <div class="backup-item">
+                                        <div class="backup-info">
+                                            <i class="fas fa-file-archive"></i>
+                                            <div>
+                                                <strong>Sao lưu tự động</strong>
+                                                <p>01/03/2023 - 08:00 - 28.5 MB</p>
+                                            </div>
+                                        </div>
+                                        <div class="backup-actions">
+                                            <button class="btn icon-btn" title="Tải xuống">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn icon-btn" title="Khôi phục">
+                                                <i class="fas fa-redo-alt"></i>
+                                            </button>
+                                            <button class="btn icon-btn" title="Xóa">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="backup-item">
+                                        <div class="backup-info">
+                                            <i class="fas fa-file-archive"></i>
+                                            <div>
+                                                <strong>Sao lưu thủ công</strong>
+                                                <p>22/02/2023 - 15:30 - 28.3 MB</p>
+                                            </div>
+                                        </div>
+                                        <div class="backup-actions">
+                                            <button class="btn icon-btn" title="Tải xuống">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn icon-btn" title="Khôi phục">
+                                                <i class="fas fa-redo-alt"></i>
+                                            </button>
+                                            <button class="btn icon-btn" title="Xóa">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="backup-item">
+                                        <div class="backup-info">
+                                            <i class="fas fa-file-archive"></i>
+                                            <div>
+                                                <strong>Sao lưu tự động</strong>
+                                                <p>15/02/2023 - 08:00 - 27.9 MB</p>
+                                            </div>
+                                        </div>
+                                        <div class="backup-actions">
+                                            <button class="btn icon-btn" title="Tải xuống">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn icon-btn" title="Khôi phục">
+                                                <i class="fas fa-redo-alt"></i>
+                                            </button>
+                                            <button class="btn icon-btn" title="Xóa">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-card">
+                                <h3 class="settings-card-title">Khôi phục dữ liệu</h3>
+                                <p class="settings-description">
+                                    Khôi phục dữ liệu từ file sao lưu. Lưu ý: Quá trình này sẽ ghi đè lên dữ liệu hiện tại.
+                                </p>
+                                <div class="restore-section">
+                                    <div class="upload-zone backup-upload">
+                                        <input type="file" id="backup-upload" accept=".zip,.backup">
+                                        <div class="upload-prompt">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p>Kéo thả file hoặc click để chọn</p>
+                                            <span>Hỗ trợ: .zip, .backup</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn primary-btn upload-btn" disabled>
+                                        <i class="fas fa-redo-alt"></i> Khôi phục dữ liệu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sidebar-loader.js"></script>
+    <script src="../js/settings.js"></script>
+</body>
+</html> 

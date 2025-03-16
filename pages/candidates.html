@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Tuyển dụng - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/candidates.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar will be loaded here via JavaScript -->
+        <div id="sidebar-container"></div>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm ứng viên...">
+                </div>
+                <div class="header-right">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="date-time">
+                        <span id="current-date">Thứ 2, 01/01/2023</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="candidates-content">
+                <div class="page-header">
+                    <h1 class="page-title">Quản lý Tuyển dụng</h1>
+                    <button class="btn primary-btn" id="add-candidate-btn">
+                        <i class="fas fa-plus"></i> Thêm ứng viên mới
+                    </button>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label for="position-filter">Vị trí:</label>
+                        <select id="position-filter" class="filter-select">
+                            <option value="">Tất cả</option>
+                            <option value="developer">Lập trình viên</option>
+                            <option value="tester">Kiểm thử viên</option>
+                            <option value="ba">Business Analyst</option>
+                            <option value="accountant">Kế toán</option>
+                            <option value="hr">Nhân sự</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="status-filter">Trạng thái:</label>
+                        <select id="status-filter" class="filter-select">
+                            <option value="">Tất cả</option>
+                            <option value="new">Mới</option>
+                            <option value="reviewing">Đang xem xét</option>
+                            <option value="interviewed">Đã phỏng vấn</option>
+                            <option value="approved">Đã duyệt</option>
+                            <option value="rejected">Từ chối</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-by">Sắp xếp theo:</label>
+                        <select id="sort-by" class="filter-select">
+                            <option value="date-desc">Ngày nộp (Mới nhất)</option>
+                            <option value="date-asc">Ngày nộp (Cũ nhất)</option>
+                            <option value="name-asc">Tên (A-Z)</option>
+                            <option value="name-desc">Tên (Z-A)</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="reset-filters">
+                        <i class="fas fa-redo"></i> Đặt lại
+                    </button>
+                </div>
+
+                <div class="candidates-table-container">
+                    <table class="candidates-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="select-all">
+                                </th>
+                                <th>Họ tên</th>
+                                <th>Vị trí ứng tuyển</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày nộp</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="candidates-list">
+                            <tr>
+                                <td><input type="checkbox" class="candidate-checkbox"></td>
+                                <td>
+                                    <div class="candidate-name">
+                                        <img src="../img/avatar1.png" alt="Ảnh ứng viên" class="candidate-avatar">
+                                        <span>Nguyễn Văn A</span>
+                                    </div>
+                                </td>
+                                <td>Lập trình viên</td>
+                                <td>nguyenvana@example.com</td>
+                                <td>0912345678</td>
+                                <td>15/05/2023</td>
+                                <td>
+                                    <span class="status-badge new">Mới</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn" title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit-btn" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete-btn" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="candidate-checkbox"></td>
+                                <td>
+                                    <div class="candidate-name">
+                                        <img src="../img/avatar2.png" alt="Ảnh ứng viên" class="candidate-avatar">
+                                        <span>Trần Thị B</span>
+                                    </div>
+                                </td>
+                                <td>Business Analyst</td>
+                                <td>tranthib@example.com</td>
+                                <td>0923456789</td>
+                                <td>10/05/2023</td>
+                                <td>
+                                    <span class="status-badge interviewed">Đã phỏng vấn</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn" title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit-btn" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete-btn" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="candidate-checkbox"></td>
+                                <td>
+                                    <div class="candidate-name">
+                                        <img src="../img/avatar3.png" alt="Ảnh ứng viên" class="candidate-avatar">
+                                        <span>Lê Văn C</span>
+                                    </div>
+                                </td>
+                                <td>Kế toán</td>
+                                <td>levanc@example.com</td>
+                                <td>0934567890</td>
+                                <td>05/05/2023</td>
+                                <td>
+                                    <span class="status-badge approved">Đã duyệt</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn" title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit-btn" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete-btn" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <i class="fas fa-angle-double-left"></i>
+                    </button>
+                    <button class="pagination-btn" disabled>
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                    <button class="pagination-btn">
+                        <i class="fas fa-angle-double-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding/editing candidate -->
+    <div class="modal" id="candidate-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Thêm ứng viên mới</h2>
+                <button class="close-btn" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="candidate-form">
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" data-tab="personal-info">Thông tin cá nhân</button>
+                        <button type="button" class="tab-btn" data-tab="education">Học vấn</button>
+                        <button type="button" class="tab-btn" data-tab="experience">Kinh nghiệm</button>
+                        <button type="button" class="tab-btn" data-tab="attachments">Tài liệu đính kèm</button>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="personal-info">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullname">Họ tên <span class="required">*</span></label>
+                                    <input type="text" id="fullname" name="fullname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="position">Vị trí ứng tuyển <span class="required">*</span></label>
+                                    <select id="position" name="position" required>
+                                        <option value="">Chọn vị trí</option>
+                                        <option value="developer">Lập trình viên</option>
+                                        <option value="tester">Kiểm thử viên</option>
+                                        <option value="ba">Business Analyst</option>
+                                        <option value="accountant">Kế toán</option>
+                                        <option value="hr">Nhân sự</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="birthdate">Ngày sinh</label>
+                                    <input type="date" id="birthdate" name="birthdate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Giới tính</label>
+                                    <select id="gender" name="gender">
+                                        <option value="">Chọn giới tính</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female">Nữ</option>
+                                        <option value="other">Khác</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Số điện thoại <span class="required">*</span></label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ</label>
+                                <textarea id="address" name="address" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="education">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="education-level">Trình độ học vấn</label>
+                                    <select id="education-level" name="education-level">
+                                        <option value="">Chọn trình độ</option>
+                                        <option value="highschool">Trung học phổ thông</option>
+                                        <option value="college">Cao đẳng</option>
+                                        <option value="university">Đại học</option>
+                                        <option value="master">Thạc sĩ</option>
+                                        <option value="doctor">Tiến sĩ</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="major">Chuyên ngành</label>
+                                    <input type="text" id="major" name="major">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="school">Trường học</label>
+                                    <input type="text" id="school" name="school">
+                                </div>
+                                <div class="form-group">
+                                    <label for="graduation-year">Năm tốt nghiệp</label>
+                                    <input type="number" id="graduation-year" name="graduation-year" min="1980" max="2030">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="certificates">Chứng chỉ, kỹ năng</label>
+                                <textarea id="certificates" name="certificates" rows="3" placeholder="Nhập các chứng chỉ, kỹ năng (phân cách bằng dấu phẩy)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="experience">
+                            <div id="experience-list">
+                                <div class="experience-item">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="company">Công ty</label>
+                                            <input type="text" name="company[]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="position">Vị trí</label>
+                                            <input type="text" name="exp-position[]">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="start-date">Từ ngày</label>
+                                            <input type="date" name="start-date[]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end-date">Đến ngày</label>
+                                            <input type="date" name="end-date[]">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Mô tả công việc</label>
+                                        <textarea name="description[]" rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn add-btn" id="add-experience">
+                                <i class="fas fa-plus"></i> Thêm kinh nghiệm
+                            </button>
+                        </div>
+
+                        <div class="tab-pane" id="attachments">
+                            <div class="upload-container">
+                                <div class="upload-item">
+                                    <label for="cv-upload">CV/Sơ yếu lý lịch</label>
+                                    <div class="upload-zone">
+                                        <input type="file" id="cv-upload" name="cv-upload" accept=".pdf,.doc,.docx">
+                                        <div class="upload-prompt">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p>Kéo thả file hoặc click để chọn</p>
+                                            <span>Hỗ trợ: PDF, DOC, DOCX (tối đa 5MB)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upload-item">
+                                    <label for="other-docs">Giấy tờ, chứng chỉ khác</label>
+                                    <div class="upload-zone">
+                                        <input type="file" id="other-docs" name="other-docs" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple>
+                                        <div class="upload-prompt">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p>Kéo thả file hoặc click để chọn</p>
+                                            <span>Hỗ trợ: PDF, DOC, DOCX, JPG, PNG (tối đa 5MB mỗi file)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-buttons">
+                            <button type="button" class="btn cancel-btn" id="cancel-form">Hủy</button>
+                            <button type="submit" class="btn primary-btn">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sidebar-loader.js"></script>
+    <script src="../js/candidates.js"></script>
+</body>
+</html> 
