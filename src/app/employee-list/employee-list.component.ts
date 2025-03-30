@@ -16,6 +16,29 @@ export class EmployeeListComponent implements OnInit {
   isLoading = false;
   error = '';
   
+  // Thêm đối tượng newEmployee để lưu giá trị form
+  newEmployee: Employee = {
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    gender: '',
+    cccd: '',
+    phone: '',
+    email: '',
+    department: '',
+    position: '',
+    level: '',
+    joinDate: '',
+    contractType: '',
+    salary: 0,
+    username: '',
+    password: '',
+    role: '',
+    status: 'active'
+  };
+  
+  formSubmitted = false;
+  
   departments = [
     'IT', 'Human Resources', 'Finance', 'Marketing', 'Sales', 
     'Operations', 'Research & Development', 'Customer Support'
@@ -45,6 +68,26 @@ export class EmployeeListComponent implements OnInit {
   }
   
   openAddEmployeeModal() {
+    // Khởi tạo lại newEmployee khi mở form
+    this.newEmployee = {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      gender: '',
+      cccd: '',
+      phone: '',
+      email: '',
+      department: '',
+      position: '',
+      level: '',
+      joinDate: '',
+      contractType: '',
+      salary: 0,
+      username: '',
+      password: '',
+      role: '',
+      status: 'active'
+    };
     this.showAddEmployeeModal = true;
   }
   
@@ -52,11 +95,42 @@ export class EmployeeListComponent implements OnInit {
     this.showAddEmployeeModal = false;
   }
   
+  // Phương thức kiểm tra form và hiển thị các trường không hợp lệ
+  validateForm(form: NgForm | null) {
+    if (!form) return;
+    
+    // Chỉ validate khi form đã được submit
+    if (this.formSubmitted) {
+      console.log('Validating form. Current values:', this.newEmployee);
+      
+      Object.keys(form.controls).forEach(key => {
+        const control = form.controls[key];
+        if (control.invalid) {
+          control.markAsTouched();
+          console.log(`Field ${key} is invalid:`, control.errors);
+        }
+      });
+    }
+  }
+  
   saveEmployee(form: NgForm) {
+    this.formSubmitted = true;
+    
+    // Thay thế sử dụng newEmployee thay vì form.value
+    console.log('Form valid:', form.valid);
+    console.log('Form values:', this.newEmployee);
+    console.log('Form controls:', form.controls);
+    
+    // Validate form và hiển thị các trường không hợp lệ
+    this.validateForm(form);
+    
     if (form.valid) {
       this.isLoading = true;
       
-      const employeeData: Employee = form.value;
+      // Dùng đối tượng newEmployee đã được ràng buộc với form
+      const employeeData: Employee = this.newEmployee;
+      
+      console.log('Sending employee data:', employeeData);
       
       this.employeeService.createEmployee(employeeData).subscribe({
         next: (response) => {
@@ -65,15 +139,29 @@ export class EmployeeListComponent implements OnInit {
           this.closeAddEmployeeModal();
           alert('Nhân viên đã được thêm thành công!');
           this.isLoading = false;
+          this.formSubmitted = false;
         },
         error: (err) => {
           console.error('Error creating employee:', err);
-          alert('Lỗi khi tạo nhân viên: ' + (err.error?.message || 'Vui lòng thử lại sau.'));
+          const errorMessage = err.error?.error || err.error?.message || 'Vui lòng thử lại sau.';
+          alert('Lỗi khi tạo nhân viên: ' + errorMessage);
           this.isLoading = false;
         }
       });
     } else {
-      alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+      // Hiển thị cụ thể trường nào không hợp lệ
+      let invalidFields: string[] = [];
+      
+      Object.keys(form.controls).forEach(key => {
+        const control = form.controls[key];
+        if (control.invalid) {
+          control.markAsTouched();
+          console.log(`Field ${key} is invalid:`, control.errors);
+          invalidFields.push(key);
+        }
+      });
+      
+      alert(`Vui lòng điền đầy đủ thông tin bắt buộc! Các trường không hợp lệ: ${invalidFields.join(', ')}`);
     }
   }
   

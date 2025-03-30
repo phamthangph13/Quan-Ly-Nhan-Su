@@ -30,6 +30,33 @@ exports.getEmployeeById = async (req, res) => {
 // Create new employee
 exports.createEmployee = async (req, res) => {
   try {
+    // Check if email already exists
+    const existingEmail = await Employee.findOne({ email: req.body.email });
+    if (existingEmail) {
+      return res.status(400).json({ 
+        message: 'Thông tin đã tồn tại', 
+        error: `Email ${req.body.email} đã được sử dụng.` 
+      });
+    }
+    
+    // Check if username already exists
+    const existingUsername = await Employee.findOne({ username: req.body.username });
+    if (existingUsername) {
+      return res.status(400).json({ 
+        message: 'Thông tin đã tồn tại', 
+        error: `Username ${req.body.username} đã được sử dụng.` 
+      });
+    }
+    
+    // Check if CCCD already exists
+    const existingCccd = await Employee.findOne({ cccd: req.body.cccd });
+    if (existingCccd) {
+      return res.status(400).json({ 
+        message: 'Thông tin đã tồn tại', 
+        error: `CCCD ${req.body.cccd} đã được sử dụng.` 
+      });
+    }
+    
     // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -45,11 +72,16 @@ exports.createEmployee = async (req, res) => {
     
     res.status(201).json(savedEmployee);
   } catch (error) {
+    console.error('Error creating employee:', error);
+    
     // Check for duplicate key error
     if (error.code === 11000) {
+      const fieldName = Object.keys(error.keyPattern)[0];
+      const fieldValue = req.body[fieldName];
+      
       return res.status(400).json({ 
         message: 'Thông tin đã tồn tại', 
-        error: `Trường ${Object.keys(error.keyPattern)[0]} đã được sử dụng.` 
+        error: `Trường ${fieldName} với giá trị ${fieldValue} đã được sử dụng.` 
       });
     }
     

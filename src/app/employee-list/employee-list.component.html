@@ -101,22 +101,22 @@
           <div class="form-row">
             <div class="form-group">
               <label for="lastName">Họ</label>
-              <input type="text" id="lastName" name="lastName" ngModel required>
+              <input type="text" id="lastName" name="lastName" [(ngModel)]="newEmployee.lastName" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
             <div class="form-group">
               <label for="firstName">Tên</label>
-              <input type="text" id="firstName" name="firstName" ngModel required>
+              <input type="text" id="firstName" name="firstName" [(ngModel)]="newEmployee.firstName" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
               <label for="dateOfBirth">Ngày sinh</label>
-              <input type="date" id="dateOfBirth" name="dateOfBirth" ngModel required>
+              <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="newEmployee.dateOfBirth" (change)="validateForm(employeeForm)" required>
             </div>
             <div class="form-group">
               <label for="gender">Giới tính</label>
-              <select id="gender" name="gender" ngModel required>
+              <select id="gender" name="gender" [(ngModel)]="newEmployee.gender" (change)="validateForm(employeeForm)" required>
                 <option value="">-- Chọn giới tính --</option>
                 <option value="male">Nam</option>
                 <option value="female">Nữ</option>
@@ -128,28 +128,28 @@
           <div class="form-row">
             <div class="form-group">
               <label for="cccd">Số CCCD</label>
-              <input type="text" id="cccd" name="cccd" ngModel required>
+              <input type="text" id="cccd" name="cccd" [(ngModel)]="newEmployee.cccd" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
             <div class="form-group">
               <label for="issueDate">Ngày cấp</label>
-              <input type="date" id="issueDate" name="issueDate" ngModel>
+              <input type="date" id="issueDate" name="issueDate" [(ngModel)]="newEmployee.issueDate" (change)="validateForm(employeeForm)">
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Số điện thoại</label>
-              <input type="tel" id="phone" name="phone" ngModel required>
+              <input type="tel" id="phone" name="phone" [(ngModel)]="newEmployee.phone" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" ngModel required>
+              <input type="email" id="email" name="email" [(ngModel)]="newEmployee.email" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
           </div>
           
           <div class="form-group">
             <label for="address">Địa chỉ</label>
-            <textarea id="address" name="address" rows="2" ngModel></textarea>
+            <textarea id="address" name="address" rows="2" [(ngModel)]="newEmployee.address" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)"></textarea>
           </div>
         </div>
         
@@ -159,21 +159,21 @@
           <div class="form-row">
             <div class="form-group">
               <label for="department">Phòng ban</label>
-              <select id="department" name="department" ngModel required>
+              <select id="department" name="department" [(ngModel)]="newEmployee.department" required>
                 <option value="">-- Chọn phòng ban --</option>
                 <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="position">Vị trí</label>
-              <input type="text" id="position" name="position" ngModel required>
+              <input type="text" id="position" name="position" [(ngModel)]="newEmployee.position" required>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
               <label for="level">Cấp bậc</label>
-              <select id="level" name="level" ngModel required>
+              <select id="level" name="level" [(ngModel)]="newEmployee.level" required>
                 <option value="">-- Chọn cấp bậc --</option>
                 <option value="intern">Thực tập sinh</option>
                 <option value="junior">Nhân viên</option>
@@ -184,14 +184,14 @@
             </div>
             <div class="form-group">
               <label for="joinDate">Ngày vào làm</label>
-              <input type="date" id="joinDate" name="joinDate" ngModel required>
+              <input type="date" id="joinDate" name="joinDate" [(ngModel)]="newEmployee.joinDate" required>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
               <label for="contractType">Loại hợp đồng</label>
-              <select id="contractType" name="contractType" ngModel required>
+              <select id="contractType" name="contractType" [(ngModel)]="newEmployee.contractType" required>
                 <option value="">-- Chọn loại hợp đồng --</option>
                 <option value="fulltime">Toàn thời gian</option>
                 <option value="parttime">Bán thời gian</option>
@@ -201,7 +201,7 @@
             </div>
             <div class="form-group">
               <label for="salary">Lương cơ bản</label>
-              <input type="number" id="salary" name="salary" ngModel required>
+              <input type="number" id="salary" name="salary" [(ngModel)]="newEmployee.salary" required>
             </div>
           </div>
         </div>
@@ -212,18 +212,18 @@
           <div class="form-row">
             <div class="form-group">
               <label for="username">Tên đăng nhập</label>
-              <input type="text" id="username" name="username" ngModel required>
+              <input type="text" id="username" name="username" [(ngModel)]="newEmployee.username" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
             <div class="form-group">
               <label for="password">Mật khẩu</label>
-              <input type="password" id="password" name="password" ngModel required>
+              <input type="password" id="password" name="password" [(ngModel)]="newEmployee.password" (input)="validateForm(employeeForm)" (change)="validateForm(employeeForm)" required>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
               <label for="role">Quyền hạn</label>
-              <select id="role" name="role" ngModel required>
+              <select id="role" name="role" [(ngModel)]="newEmployee.role" required>
                 <option value="">-- Chọn quyền hạn --</option>
                 <option value="employee">Nhân viên</option>
                 <option value="manager">Quản lý</option>
@@ -232,7 +232,7 @@
             </div>
             <div class="form-group">
               <label for="status">Trạng thái</label>
-              <select id="status" name="status" ngModel required>
+              <select id="status" name="status" [(ngModel)]="newEmployee.status" required>
                 <option value="active">Đang làm việc</option>
                 <option value="onLeave">Nghỉ phép</option>
                 <option value="inactive">Không hoạt động</option>
