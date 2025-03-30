@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const errorMessage = document.getElementById('error-message');
-    const rememberCheckbox = document.getElementById('remember');
+    const rememberCheckbox = document.getElementById('remember-me');
     
     // Check if user is already logged in
     const token = localStorage.getItem('employee_token');
@@ -48,7 +48,7 @@ async function handleLogin(event) {
     
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const rememberMe = document.getElementById('remember').checked;
+    const rememberMe = document.getElementById('remember-me').checked;
     const errorMessage = document.getElementById('error-message');
     
     // Clear previous error messages
@@ -140,7 +140,7 @@ function setupRememberMe() {
     // Check if username was saved before
     const rememberedUsername = localStorage.getItem('remembered_username');
     const usernameInput = document.getElementById('username');
-    const rememberMeCheckbox = document.getElementById('remember');
+    const rememberMeCheckbox = document.getElementById('remember-me');
     
     if (rememberedUsername && usernameInput) {
         usernameInput.value = rememberedUsername;
