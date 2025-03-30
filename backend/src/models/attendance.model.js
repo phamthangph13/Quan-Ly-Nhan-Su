@@ -12,7 +12,7 @@ const attendanceSchema = new mongoose.Schema({
     },
     checkIn: {
         time: {
-            type: Date,
+            type: String,
             required: true
         },
         status: {
@@ -23,7 +23,7 @@ const attendanceSchema = new mongoose.Schema({
         note: String
     },
     checkOut: {
-        time: Date,
+        time: String,
         status: {
             type: String,
             enum: ['on-time', 'early', 'leave'],

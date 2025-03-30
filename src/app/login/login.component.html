@@ -16,6 +16,7 @@
           [(ngModel)]="username" 
           required
           placeholder="Nhập tên đăng nhập"
+          [disabled]="isLoading"
         >
       </div>
       
@@ -28,6 +29,7 @@
           [(ngModel)]="password" 
           required
           placeholder="Nhập mật khẩu"
+          [disabled]="isLoading"
         >
       </div>
       
@@ -35,7 +37,10 @@
         {{ errorMessage }}
       </div>
       
-      <button type="submit" class="login-button">Đăng Nhập</button>
+      <button type="submit" class="login-button" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Đăng Nhập</span>
+        <span *ngIf="isLoading">Đang đăng nhập...</span>
+      </button>
     </form>
     
     <div class="login-footer">

@@ -14,6 +14,7 @@ export class DashboardComponent {
 
   logout() {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 }

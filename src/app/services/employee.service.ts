@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const API_URL = 'http://localhost:5000/api/employees';
@@ -36,29 +36,48 @@ export interface Employee {
 export class EmployeeService {
   constructor(private http: HttpClient) { }
 
+  // Helper method to get auth headers
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
   // Get all employees
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(API_URL);
+    return this.http.get<Employee[]>(API_URL, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Get employee by ID
   getEmployee(id: string): Observable<Employee> {
-    return this.http.get<Employee>(`${API_URL}/${id}`);
+    return this.http.get<Employee>(`${API_URL}/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Create new employee
   createEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(API_URL, employee);
+    return this.http.post<Employee>(API_URL, employee, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Update employee
   updateEmployee(id: string, employee: Partial<Employee>): Observable<Employee> {
-    return this.http.put<Employee>(`${API_URL}/${id}`, employee);
+    return this.http.put<Employee>(`${API_URL}/${id}`, employee, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Delete employee
   deleteEmployee(id: string): Observable<any> {
-    return this.http.delete(`${API_URL}/${id}`);
+    return this.http.delete(`${API_URL}/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   // Filter employees
@@ -74,6 +93,8 @@ export class EmployeeService {
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
 
-    return this.http.get<Employee[]>(`${API_URL}/filter?${queryParams}`);
+    return this.http.get<Employee[]>(`${API_URL}/filter?${queryParams}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 } 

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chấm Công - Hệ thống quản lý nhân sự</title>
+    <link rel="stylesheet" href="css/attendance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <h2>HR System</h2>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">Đang tải...</h3>
+                    <span id="user-position">Đang tải...</span>
+                </div>
+            </div>
+            
+            <nav class="menu">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Bảng Điều Khiển</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Hồ Sơ Cá Nhân</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="attendance.html">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Chấm Công</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="leave.html">
+                            <i class="fas fa-calendar-minus"></i>
+                            <span>Nghỉ Phép</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="salary.html">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Bảng Lương</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documents.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Tài Liệu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng Xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main content -->
+        <div class="main-content">
+            <header class="top-bar">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    
+                    <div class="messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    
+                    <div class="date-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-datetime">Đang tải...</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="page-header">
+                <h1>Chấm Công</h1>
+                <p>Quản lý thời gian làm việc và chấm công hàng ngày</p>
+            </div>
+            
+            <div class="attendance-grid">
+                <!-- Time Check Card -->
+                <div class="attendance-card time-check-card">
+                    <div class="card-header">
+                        <h2>Chấm Công Hôm Nay</h2>
+                        <div class="date-display" id="current-date">Đang tải...</div>
+                    </div>
+                    
+                    <div class="clock-container">
+                        <div class="digital-clock" id="digital-clock">00:00:00</div>
+                        <div class="clock-face">
+                            <div class="clock-center"></div>
+                            <div class="clock-hour"></div>
+                            <div class="clock-minute"></div>
+                            <div class="clock-second"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="attendance-status" id="attendance-status-container">
+                        <div class="status-message" id="status-message">Bạn chưa chấm công hôm nay</div>
+                        <div id="check-in-time"></div>
+                        <div id="check-out-time"></div>
+                    </div>
+                    
+                    <div class="attendance-actions">
+                        <button class="action-button check-in-btn" id="check-in-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Chấm Công Vào</span>
+                        </button>
+                        <button class="action-button check-out-btn" id="check-out-btn" disabled>
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Chấm Công Ra</span>
+                        </button>
+                    </div>
+                    
+                    <div class="note-container">
+                        <label for="attendance-note">Ghi chú:</label>
+                        <textarea id="attendance-note" placeholder="Nhập ghi chú (nếu có)..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Summary Card -->
+                <div class="attendance-card summary-card">
+                    <div class="card-header">
+                        <h2>Thống Kê Tháng Này</h2>
+                        <div class="month-display" id="current-month">Đang tải...</div>
+                    </div>
+                    
+                    <div class="attendance-summary">
+                        <div class="attendance-stat">
+                            <div class="stat-circle">
+                                <span class="value" id="present-days">0</span>
+                            </div>
+                            <div class="stat-label">Có mặt</div>
+                        </div>
+                        
+                        <div class="attendance-stat">
+                            <div class="stat-circle">
+                                <span class="value" id="absent-days">0</span>
+                            </div>
+                            <div class="stat-label">Vắng mặt</div>
+                        </div>
+                        
+                        <div class="attendance-stat">
+                            <div class="stat-circle">
+                                <span class="value" id="late-days">0</span>
+                            </div>
+                            <div class="stat-label">Đi muộn</div>
+                        </div>
+                        
+                        <div class="attendance-stat">
+                            <div class="stat-circle">
+                                <span class="value" id="leave-days">0</span>
+                            </div>
+                            <div class="stat-label">Nghỉ phép còn lại</div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-hours-container">
+                        <h3>Tổng số giờ làm việc</h3>
+                        <div class="work-hours">
+                            <div class="hours-value" id="total-work-hours">0</div>
+                            <div class="hours-label">Giờ</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" id="work-hours-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>0h</span>
+                            <span>168h</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Attendance History Card -->
+                <div class="attendance-card history-card">
+                    <div class="card-header">
+                        <h2>Lịch Sử Chấm Công</h2>
+                        <div class="view-selector">
+                            <button class="view-option active" data-view="week">Tuần</button>
+                            <button class="view-option" data-view="month">Tháng</button>
+                        </div>
+                    </div>
+                    
+                    <div class="history-table-container">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Giờ vào</th>
+                                    <th>Giờ ra</th>
+                                    <th>Tổng giờ</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendance-history">
+                                <!-- Attendance history will be populated here -->
+                                <tr class="placeholder-row">
+                                    <td colspan="5">Đang tải dữ liệu...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn" id="prev-page">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="page-info" id="page-info">Trang 1/1</div>
+                        <button class="pagination-btn" id="next-page">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for confirmation -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Xác nhận chấm công</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirmation-message">Bạn có chắc chắn muốn chấm công?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn cancel-btn" id="cancel-confirm">Hủy</button>
+                <button class="btn confirm-btn" id="confirm-action">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/attendance.js"></script>
+</body>
+</html> 
