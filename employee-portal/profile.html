@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Cá Nhân - HR System</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <h2>HR System</h2>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">Đang tải...</h3>
+                    <span id="user-position">Đang tải...</span>
+                </div>
+            </div>
+            
+            <nav class="menu">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Bảng Điều Khiển</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Hồ Sơ Cá Nhân</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="attendance.html">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Chấm Công</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="leave.html">
+                            <i class="fas fa-calendar-minus"></i>
+                            <span>Nghỉ Phép</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="salary.html">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Bảng Lương</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documents.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Tài Liệu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng Xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main content -->
+        <div class="main-content">
+            <header class="top-bar">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    
+                    <div class="messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    
+                    <div class="date-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-datetime">Đang tải...</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-header">
+                <h1>Hồ Sơ Cá Nhân</h1>
+                <div class="breadcrumb">
+                    <a href="dashboard.html">Bảng Điều Khiển</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Hồ Sơ Cá Nhân</span>
+                </div>
+            </div>
+            
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-summary">
+                        <h2 id="profile-name">Đang tải thông tin...</h2>
+                        <p id="profile-position">Đang tải...</p>
+                        <div class="profile-badges">
+                            <span class="badge" id="profile-department">Phòng ban</span>
+                            <span class="badge" id="profile-level">Cấp bậc</span>
+                            <span class="badge" id="profile-status">Trạng thái</span>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button id="edit-profile-btn" class="primary-btn">
+                            <i class="fas fa-edit"></i> Cập Nhật Thông Tin
+                        </button>
+                        <button id="change-password-btn" class="secondary-btn">
+                            <i class="fas fa-key"></i> Đổi Mật Khẩu
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="tab-container">
+                        <div class="tab-nav">
+                            <button class="tab-btn active" data-tab="personal-info">Thông Tin Cá Nhân</button>
+                            <button class="tab-btn" data-tab="employment-info">Thông Tin Công Việc</button>
+                            <button class="tab-btn" data-tab="contact-info">Thông Tin Liên Hệ</button>
+                        </div>
+                        
+                        <div class="tab-content">
+                            <!-- Personal Info Tab -->
+                            <div class="tab-pane active" id="personal-info">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>Họ và tên</label>
+                                        <p id="full-name">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Ngày sinh</label>
+                                        <p id="birth-date">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Giới tính</label>
+                                        <p id="gender">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Số CCCD</label>
+                                        <p id="cccd-number">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Ngày cấp</label>
+                                        <p id="issue-date">Đang tải...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Employment Info Tab -->
+                            <div class="tab-pane" id="employment-info">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>Phòng ban</label>
+                                        <p id="department">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Vị trí</label>
+                                        <p id="position">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Cấp bậc</label>
+                                        <p id="level">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Ngày vào làm</label>
+                                        <p id="join-date">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Loại hợp đồng</label>
+                                        <p id="contract-type">Đang tải...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Info Tab -->
+                            <div class="tab-pane" id="contact-info">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>Số điện thoại</label>
+                                        <p id="phone-number">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Email</label>
+                                        <p id="email">Đang tải...</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Địa chỉ</label>
+                                        <p id="address">Đang tải...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Edit Profile Modal -->
+            <div class="modal" id="edit-profile-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Cập Nhật Thông Tin Cá Nhân</h2>
+                        <button class="close-btn" id="close-edit-modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-profile-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="edit-phone">Số điện thoại</label>
+                                    <input type="text" id="edit-phone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-email">Email</label>
+                                    <input type="email" id="edit-email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-address">Địa chỉ</label>
+                                    <textarea id="edit-address" name="address" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="secondary-btn" id="cancel-edit">Hủy</button>
+                                <button type="submit" class="primary-btn">Lưu Thay Đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Change Password Modal -->
+            <div class="modal" id="change-password-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Đổi Mật Khẩu</h2>
+                        <button class="close-btn" id="close-password-modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="change-password-form">
+                            <div class="form-group">
+                                <label for="current-password">Mật khẩu hiện tại</label>
+                                <input type="password" id="current-password" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Mật khẩu mới</label>
+                                <input type="password" id="new-password" name="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                                <input type="password" id="confirm-password" name="confirmPassword" required>
+                            </div>
+                            <div class="error-message" id="password-error"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="secondary-btn" id="cancel-password">Hủy</button>
+                                <button type="submit" class="primary-btn">Đổi Mật Khẩu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/dashboard.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html> 

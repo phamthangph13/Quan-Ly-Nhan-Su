@@ -1,0 +1,192 @@
+<div class="employee-form-container">
+  <div class="sidebar">
+    <div class="logo">
+      <h2>Hệ Thống HR</h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a [routerLink]="['/dashboard']">Trang Chủ</a></li>
+        <li><a [routerLink]="['/employee-list']">Nhân Viên</a></li>
+        <li><a [routerLink]="['/salary-management']">Quản Lý Lương</a></li>
+        <li><a [routerLink]="['/leave-management']">Quản Lý Nghỉ Phép</a></li>
+        <li><a [routerLink]="['/attendance-management']">Quản Lý Chấm Công</a></li>
+        <li><a [routerLink]="['/hr-settings']">Cài Đặt</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="main-content">
+    <div class="header">
+      <h1>{{ pageTitle }}</h1>
+    </div>
+    
+    <!-- Loading indicator -->
+    <div class="loading-indicator" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Đang tải dữ liệu...</p>
+    </div>
+    
+    <!-- Error message -->
+    <div class="error-message" *ngIf="error">
+      <p>{{ error }}</p>
+      <button (click)="loadEmployeeData(employeeId)">Thử lại</button>
+    </div>
+    
+    <div class="form-container" *ngIf="!isLoading && !error">
+      <form (ngSubmit)="saveEmployee()">
+        <div class="form-section">
+          <h3>Thông tin cá nhân</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="lastName">Họ</label>
+              <input type="text" id="lastName" name="lastName" [(ngModel)]="employee.lastName" required>
+            </div>
+            <div class="form-group">
+              <label for="firstName">Tên</label>
+              <input type="text" id="firstName" name="firstName" [(ngModel)]="employee.firstName" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dateOfBirth">Ngày sinh</label>
+              <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="employee.dateOfBirth" required>
+            </div>
+            <div class="form-group">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender" [(ngModel)]="employee.gender" required>
+                <option value="">-- Chọn giới tính --</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+                <option value="other">Khác</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cccd">Số CCCD</label>
+              <input type="text" id="cccd" name="cccd" [(ngModel)]="employee.cccd" required>
+            </div>
+            <div class="form-group">
+              <label for="issueDate">Ngày cấp</label>
+              <input type="date" id="issueDate" name="issueDate" [(ngModel)]="employee.issueDate">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Số điện thoại</label>
+              <input type="tel" id="phone" name="phone" [(ngModel)]="employee.phone" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" [(ngModel)]="employee.email" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <textarea id="address" name="address" rows="2" [(ngModel)]="employee.address"></textarea>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3>Thông tin công việc</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="department">Phòng ban</label>
+              <select id="department" name="department" [(ngModel)]="employee.department" required>
+                <option value="">-- Chọn phòng ban --</option>
+                <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="position">Vị trí</label>
+              <input type="text" id="position" name="position" [(ngModel)]="employee.position" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="level">Cấp bậc</label>
+              <select id="level" name="level" [(ngModel)]="employee.level" required>
+                <option value="">-- Chọn cấp bậc --</option>
+                <option value="intern">Thực tập sinh</option>
+                <option value="junior">Nhân viên</option>
+                <option value="senior">Nhân viên cấp cao</option>
+                <option value="manager">Quản lý</option>
+                <option value="director">Giám đốc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="joinDate">Ngày vào làm</label>
+              <input type="date" id="joinDate" name="joinDate" [(ngModel)]="employee.joinDate" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contractType">Loại hợp đồng</label>
+              <select id="contractType" name="contractType" [(ngModel)]="employee.contractType" required>
+                <option value="">-- Chọn loại hợp đồng --</option>
+                <option value="fulltime">Toàn thời gian</option>
+                <option value="parttime">Bán thời gian</option>
+                <option value="contractor">Hợp đồng tư vấn</option>
+                <option value="intern">Thực tập</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="salary">Lương cơ bản</label>
+              <input type="number" id="salary" name="salary" [(ngModel)]="employee.salary" required>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3>Thông tin đăng nhập</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="username">Tên đăng nhập</label>
+              <input type="text" id="username" name="username" [(ngModel)]="employee.username" required>
+            </div>
+            <div class="form-group">
+              <label for="password">
+                {{ isEditMode ? 'Mật khẩu mới (để trống nếu không đổi)' : 'Mật khẩu' }}
+              </label>
+              <input type="password" id="password" name="password" [(ngModel)]="employee.password" [required]="!isEditMode">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="role">Quyền hạn</label>
+              <select id="role" name="role" [(ngModel)]="employee.role" required>
+                <option value="">-- Chọn quyền hạn --</option>
+                <option value="employee">Nhân viên</option>
+                <option value="manager">Quản lý</option>
+                <option value="admin">Quản trị viên</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="status">Trạng thái</label>
+              <select id="status" name="status" [(ngModel)]="employee.status" required>
+                <option value="active">Đang làm việc</option>
+                <option value="onLeave">Nghỉ phép</option>
+                <option value="inactive">Không hoạt động</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-buttons">
+          <button type="button" class="cancel-btn" (click)="cancel()">Hủy</button>
+          <button type="submit" class="save-btn">{{ isEditMode ? 'Cập Nhật' : 'Lưu' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

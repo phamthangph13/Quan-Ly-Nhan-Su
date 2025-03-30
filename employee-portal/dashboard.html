@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Điều Khiển Nhân Viên</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i>
+                <h2>HR System</h2>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">Đang tải...</h3>
+                    <span id="user-position">Đang tải...</span>
+                </div>
+            </div>
+            
+            <nav class="menu">
+                <ul>
+                    <li class="active">
+                        <a href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Bảng Điều Khiển</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Hồ Sơ Cá Nhân</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="attendance.html">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Chấm Công</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="leave.html">
+                            <i class="fas fa-calendar-minus"></i>
+                            <span>Nghỉ Phép</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="salary.html">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Bảng Lương</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documents.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Tài Liệu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng Xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main content -->
+        <div class="main-content">
+            <header class="top-bar">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm...">
+                </div>
+                
+                <div class="top-bar-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    
+                    <div class="messages">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    
+                    <div class="date-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-datetime">Đang tải...</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="welcome-section">
+                <h1>Xin chào, <span id="welcome-name">Nhân viên</span>!</h1>
+                <p id="welcome-message">Chúc bạn có một ngày làm việc hiệu quả.</p>
+                
+                <div class="quick-actions">
+                    <div class="action-card">
+                        <i class="fas fa-clock"></i>
+                        <span>Chấm công</span>
+                    </div>
+                    
+                    <div class="action-card">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Đăng ký nghỉ phép</span>
+                    </div>
+                    
+                    <div class="action-card">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Xem bảng lương</span>
+                    </div>
+                    
+                    <div class="action-card">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Cập nhật hồ sơ</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <!-- Attendance summary -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Thông Tin Chấm Công</h2>
+                        <span class="view-all">Xem tất cả</span>
+                    </div>
+                    
+                    <div class="attendance-summary">
+                        <div class="attendance-stat">
+                            <div class="stat-value">
+                                <span class="value" id="present-days">22</span>
+                                <span class="unit">ngày</span>
+                            </div>
+                            <div class="stat-label">Có mặt</div>
+                        </div>
+                        
+                        <div class="attendance-stat">
+                            <div class="stat-value">
+                                <span class="value" id="absent-days">1</span>
+                                <span class="unit">ngày</span>
+                            </div>
+                            <div class="stat-label">Vắng mặt</div>
+                        </div>
+                        
+                        <div class="attendance-stat">
+                            <div class="stat-value">
+                                <span class="value" id="late-days">2</span>
+                                <span class="unit">ngày</span>
+                            </div>
+                            <div class="stat-label">Đi muộn</div>
+                        </div>
+                        
+                        <div class="attendance-stat">
+                            <div class="stat-value">
+                                <span class="value" id="leave-days">5</span>
+                                <span class="unit">ngày</span>
+                            </div>
+                            <div class="stat-label">Nghỉ phép còn lại</div>
+                        </div>
+                    </div>
+                    
+                    <div class="attendance-status">
+                        <div class="current-status" id="attendance-status">
+                            <span class="status-badge present">Đã chấm công</span>
+                            <span class="time">08:05 AM</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upcoming events -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Sự Kiện Sắp Tới</h2>
+                        <span class="view-all">Xem lịch</span>
+                    </div>
+                    
+                    <ul class="event-list">
+                        <li class="event-item">
+                            <div class="event-date">
+                                <span class="day">15</span>
+                                <span class="month">Tháng 4</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>Họp phòng ban hàng tháng</h3>
+                                <p>09:00 AM - Phòng họp A</p>
+                            </div>
+                        </li>
+                        
+                        <li class="event-item">
+                            <div class="event-date">
+                                <span class="day">18</span>
+                                <span class="month">Tháng 4</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>Đào tạo kỹ năng mềm</h3>
+                                <p>02:00 PM - Phòng đào tạo</p>
+                            </div>
+                        </li>
+                        
+                        <li class="event-item">
+                            <div class="event-date">
+                                <span class="day">25</span>
+                                <span class="month">Tháng 4</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>Tiệc sinh nhật công ty</h3>
+                                <p>06:00 PM - Sảnh chính</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Recent announcements -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Thông Báo Mới</h2>
+                        <span class="view-all">Xem tất cả</span>
+                    </div>
+                    
+                    <ul class="announcement-list">
+                        <li class="announcement-item">
+                            <div class="announcement-header">
+                                <h3>Thay đổi chính sách làm việc từ xa</h3>
+                                <span class="date">12 Tháng 4, 2025</span>
+                            </div>
+                            <p>Công ty sẽ áp dụng chính sách làm việc từ xa mới từ tháng 5, cho phép nhân viên làm việc tại nhà 2 ngày/tuần.</p>
+                        </li>
+                        
+                        <li class="announcement-item">
+                            <div class="announcement-header">
+                                <h3>Khai trương văn phòng mới</h3>
+                                <span class="date">8 Tháng 4, 2025</span>
+                            </div>
+                            <p>Văn phòng mới tại Quận 2 sẽ chính thức đi vào hoạt động từ ngày 1/5. Nhân viên có thể đăng ký tham quan trước.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Recent documents -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Tài Liệu Gần Đây</h2>
+                        <span class="view-all">Xem tất cả</span>
+                    </div>
+                    
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="document-details">
+                                <h3>Sổ tay nhân viên 2025</h3>
+                                <span class="date">Cập nhật 05 Tháng 4, 2025</span>
+                            </div>
+                            <a href="#" class="document-action download">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </li>
+                        
+                        <li class="document-item">
+                            <i class="fas fa-file-excel"></i>
+                            <div class="document-details">
+                                <h3>Bảng chấm công tháng 3</h3>
+                                <span class="date">Cập nhật 01 Tháng 4, 2025</span>
+                            </div>
+                            <a href="#" class="document-action download">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </li>
+                        
+                        <li class="document-item">
+                            <i class="fas fa-file-word"></i>
+                            <div class="document-details">
+                                <h3>Mẫu đơn xin nghỉ phép</h3>
+                                <span class="date">Cập nhật 25 Tháng 3, 2025</span>
+                            </div>
+                            <a href="#" class="document-action download">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 

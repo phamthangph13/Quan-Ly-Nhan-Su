@@ -1,0 +1,118 @@
+<div class="leave-container">
+  <div class="sidebar">
+    <div class="logo">
+      <h2>Hệ Thống HR</h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/dashboard">Trang Chủ</a></li>
+        <li><a href="/employee-list">Nhân Viên</a></li>
+        <li><a href="/salary-management">Quản Lý Lương</a></li>
+        <li><a href="/leave-management" class="active">Quản Lý Nghỉ Phép</a></li>
+        <li><a href="/attendance-management">Quản Lý Chấm Công</a></li>
+        <li><a href="/hr-settings">Cài Đặt</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="main-content">
+    <div class="header">
+      <h1>Quản Lý Nghỉ Phép</h1>
+      <div class="action-buttons">
+        <button class="add-btn">+ Tạo Đơn Nghỉ Phép</button>
+      </div>
+    </div>
+    
+    <div class="filter-section">
+      <div class="filter-group">
+        <label>Trạng thái:</label>
+        <select>
+          <option value="all">Tất cả</option>
+          <option value="pending">Chờ duyệt</option>
+          <option value="approved">Đã duyệt</option>
+          <option value="rejected">Từ chối</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label>Thời gian:</label>
+        <select>
+          <option value="all">Tất cả</option>
+          <option value="this-month">Tháng này</option>
+          <option value="last-month">Tháng trước</option>
+          <option value="this-year">Năm nay</option>
+        </select>
+      </div>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm nhân viên...">
+        <button>Tìm Kiếm</button>
+      </div>
+    </div>
+    
+    <div class="leave-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nhân Viên</th>
+            <th>Loại Nghỉ</th>
+            <th>Bắt Đầu</th>
+            <th>Kết Thúc</th>
+            <th>Số Ngày</th>
+            <th>Lý Do</th>
+            <th>Trạng Thái</th>
+            <th>Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaveRequests">
+            <td>{{ leave.id }}</td>
+            <td>{{ leave.employeeName }}</td>
+            <td>{{ leave.type }}</td>
+            <td>{{ leave.startDate }}</td>
+            <td>{{ leave.endDate }}</td>
+            <td>{{ leave.days }}</td>
+            <td>{{ leave.reason }}</td>
+            <td>
+              <span class="status-pill" [ngClass]="{
+                'status-pending': leave.status === 'Chờ duyệt',
+                'status-approved': leave.status === 'Đã duyệt',
+                'status-rejected': leave.status === 'Từ chối'
+              }">
+                {{ leave.status }}
+              </span>
+            </td>
+            <td>
+              <button class="action-btn view">Xem</button>
+              <button *ngIf="leave.status === 'Chờ duyệt'" class="action-btn approve">Duyệt</button>
+              <button *ngIf="leave.status === 'Chờ duyệt'" class="action-btn reject">Từ chối</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="summary-section">
+      <div class="summary-card">
+        <h3>Tổng Đơn Nghỉ Phép</h3>
+        <div class="summary-value">{{ totalLeaveRequests }}</div>
+      </div>
+      
+      <div class="summary-card">
+        <h3>Đơn Chờ Duyệt</h3>
+        <div class="summary-value">{{ pendingLeaveRequests }}</div>
+      </div>
+      
+      <div class="summary-card">
+        <h3>Ngày Nghỉ Trung Bình</h3>
+        <div class="summary-value">{{ avgLeaveDays }}</div>
+      </div>
+    </div>
+    
+    <div class="development-notice">
+      <h2>Đang Phát Triển</h2>
+      <p>Chức năng quản lý nghỉ phép đang trong quá trình phát triển. Sẽ có thêm tính năng mới sớm.</p>
+    </div>
+  </div>
+</div>

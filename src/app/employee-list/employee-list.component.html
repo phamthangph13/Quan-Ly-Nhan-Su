@@ -1,0 +1,251 @@
+<div class="employee-list-container">
+  <div class="sidebar">
+    <div class="logo">
+      <h2>Hệ Thống HR</h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/dashboard">Trang Chủ</a></li>
+        <li><a href="/employee-list" class="active">Nhân Viên</a></li>
+        <li><a href="/salary-management">Quản Lý Lương</a></li>
+        <li><a href="/leave-management">Quản Lý Nghỉ Phép</a></li>
+        <li><a href="/attendance-management">Quản Lý Chấm Công</a></li>
+        <li><a href="/hr-settings">Cài Đặt</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="main-content">
+    <div class="header">
+      <h1>Danh Sách Nhân Viên</h1>
+      <div class="actions">
+        <div class="search-bar">
+          <input type="text" placeholder="Tìm kiếm nhân viên..." #searchInput>
+          <button (click)="searchEmployees(searchInput.value)">Tìm Kiếm</button>
+        </div>
+        <button class="add-employee-btn" (click)="openAddEmployeeModal()">+ Thêm Nhân Viên</button>
+      </div>
+    </div>
+    
+    <!-- Loading indicator -->
+    <div class="loading-indicator" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Đang tải dữ liệu...</p>
+    </div>
+    
+    <!-- Error message -->
+    <div class="error-message" *ngIf="error">
+      <p>{{ error }}</p>
+      <button (click)="loadEmployees()">Thử lại</button>
+    </div>
+    
+    <div class="employee-table" *ngIf="!isLoading && !error">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Họ Tên</th>
+            <th>Chức Vụ</th>
+            <th>Phòng Ban</th>
+            <th>Trạng Thái</th>
+            <th>Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.lastName }} {{ employee.firstName }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.department }}</td>
+            <td>
+              <span class="status" [ngClass]="{
+                'active': employee.status === 'active', 
+                'inactive': employee.status !== 'active'
+              }">
+                {{ employee.status === 'active' ? 'Đang làm việc' : 
+                   employee.status === 'onLeave' ? 'Nghỉ phép' : 'Không hoạt động' }}
+              </span>
+            </td>
+            <td>
+              <a class="action-btn" [routerLink]="['/employee-edit', employee.id]">Sửa</a>
+              <button class="action-btn delete" (click)="deleteEmployee(employee.id || '')">Xóa</button>
+            </td>
+          </tr>
+          <tr *ngIf="employees.length === 0">
+            <td colspan="6" class="no-data">Không có dữ liệu nhân viên</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="development-notice">
+      <h2>Đang Phát Triển</h2>
+      <p>Chức năng quản lý nhân viên đang trong quá trình phát triển. Sẽ có thêm tính năng mới sớm.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Employee creation modal -->
+<div class="modal-overlay" *ngIf="showAddEmployeeModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2>Thêm Nhân Viên Mới</h2>
+      <button class="close-btn" (click)="closeAddEmployeeModal()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <form #employeeForm="ngForm">
+        <div class="form-section">
+          <h3>Thông tin cá nhân</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="lastName">Họ</label>
+              <input type="text" id="lastName" name="lastName" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="firstName">Tên</label>
+              <input type="text" id="firstName" name="firstName" ngModel required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dateOfBirth">Ngày sinh</label>
+              <input type="date" id="dateOfBirth" name="dateOfBirth" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender" ngModel required>
+                <option value="">-- Chọn giới tính --</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+                <option value="other">Khác</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cccd">Số CCCD</label>
+              <input type="text" id="cccd" name="cccd" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="issueDate">Ngày cấp</label>
+              <input type="date" id="issueDate" name="issueDate" ngModel>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Số điện thoại</label>
+              <input type="tel" id="phone" name="phone" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" ngModel required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <textarea id="address" name="address" rows="2" ngModel></textarea>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3>Thông tin công việc</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="department">Phòng ban</label>
+              <select id="department" name="department" ngModel required>
+                <option value="">-- Chọn phòng ban --</option>
+                <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="position">Vị trí</label>
+              <input type="text" id="position" name="position" ngModel required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="level">Cấp bậc</label>
+              <select id="level" name="level" ngModel required>
+                <option value="">-- Chọn cấp bậc --</option>
+                <option value="intern">Thực tập sinh</option>
+                <option value="junior">Nhân viên</option>
+                <option value="senior">Nhân viên cấp cao</option>
+                <option value="manager">Quản lý</option>
+                <option value="director">Giám đốc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="joinDate">Ngày vào làm</label>
+              <input type="date" id="joinDate" name="joinDate" ngModel required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contractType">Loại hợp đồng</label>
+              <select id="contractType" name="contractType" ngModel required>
+                <option value="">-- Chọn loại hợp đồng --</option>
+                <option value="fulltime">Toàn thời gian</option>
+                <option value="parttime">Bán thời gian</option>
+                <option value="contractor">Hợp đồng tư vấn</option>
+                <option value="intern">Thực tập</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="salary">Lương cơ bản</label>
+              <input type="number" id="salary" name="salary" ngModel required>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3>Thông tin đăng nhập</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="username">Tên đăng nhập</label>
+              <input type="text" id="username" name="username" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="password">Mật khẩu</label>
+              <input type="password" id="password" name="password" ngModel required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="role">Quyền hạn</label>
+              <select id="role" name="role" ngModel required>
+                <option value="">-- Chọn quyền hạn --</option>
+                <option value="employee">Nhân viên</option>
+                <option value="manager">Quản lý</option>
+                <option value="admin">Quản trị viên</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="status">Trạng thái</label>
+              <select id="status" name="status" ngModel required>
+                <option value="active">Đang làm việc</option>
+                <option value="onLeave">Nghỉ phép</option>
+                <option value="inactive">Không hoạt động</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeAddEmployeeModal()">Hủy</button>
+      <button class="save-btn" (click)="saveEmployee(employeeForm)">Lưu</button>
+    </div>
+  </div>
+</div> 

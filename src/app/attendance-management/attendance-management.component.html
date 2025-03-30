@@ -1,0 +1,128 @@
+<div class="attendance-container">
+  <div class="sidebar">
+    <div class="logo">
+      <h2>Hệ Thống HR</h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/dashboard">Trang Chủ</a></li>
+        <li><a href="/employee-list">Nhân Viên</a></li>
+        <li><a href="/salary-management">Quản Lý Lương</a></li>
+        <li><a href="/leave-management">Quản Lý Nghỉ Phép</a></li>
+        <li><a href="/attendance-management" class="active">Quản Lý Chấm Công</a></li>
+        <li><a href="/hr-settings">Cài Đặt</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="main-content">
+    <div class="header">
+      <h1>Quản Lý Chấm Công</h1>
+      <div class="date-picker">
+        <button class="date-nav-btn">«</button>
+        <div class="current-date">Tháng 6, 2023</div>
+        <button class="date-nav-btn">»</button>
+      </div>
+    </div>
+    
+    <div class="filter-section">
+      <div class="filter-group">
+        <label>Phòng ban:</label>
+        <select>
+          <option value="all">Tất cả</option>
+          <option value="it">Công Nghệ Thông Tin</option>
+          <option value="hr">Nhân Sự</option>
+          <option value="finance">Kế Toán</option>
+          <option value="marketing">Marketing</option>
+        </select>
+      </div>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm nhân viên...">
+        <button>Tìm Kiếm</button>
+      </div>
+    </div>
+    
+    <div class="attendance-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Nhân Viên</th>
+            <th>Phòng Ban</th>
+            <th>Làm Việc</th>
+            <th>Nghỉ Phép</th>
+            <th>Vắng</th>
+            <th>Đi Trễ</th>
+            <th>Về Sớm</th>
+            <th>Tỷ Lệ Chuyên Cần</th>
+            <th>Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of attendanceRecords">
+            <td>{{ record.employeeName }}</td>
+            <td>{{ record.department }}</td>
+            <td>{{ record.workDays }}</td>
+            <td>{{ record.leaveDays }}</td>
+            <td>{{ record.absentDays }}</td>
+            <td>{{ record.lateDays }}</td>
+            <td>{{ record.earlyDepartures }}</td>
+            <td>
+              <div class="attendance-rate">
+                <div class="progress-bar" [style.width.%]="record.attendanceRate"></div>
+                <span>{{ record.attendanceRate }}%</span>
+              </div>
+            </td>
+            <td>
+              <button class="action-btn view">Chi Tiết</button>
+              <button class="action-btn edit">Chỉnh Sửa</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="summary-section">
+      <div class="summary-card">
+        <h3>Tỷ Lệ Chuyên Cần</h3>
+        <div class="summary-value">{{ avgAttendanceRate }}%</div>
+      </div>
+      
+      <div class="summary-card">
+        <h3>Nhân Viên Chuyên Cần Nhất</h3>
+        <div class="summary-value">{{ bestAttendanceEmployee }}</div>
+      </div>
+      
+      <div class="summary-card">
+        <h3>Nhân Viên Hay Đi Trễ Nhất</h3>
+        <div class="summary-value">{{ mostLateEmployee }}</div>
+      </div>
+    </div>
+    
+    <div class="calendar-view">
+      <h2>Lịch Chấm Công</h2>
+      <div class="calendar-header">
+        <div class="weekday">CN</div>
+        <div class="weekday">T2</div>
+        <div class="weekday">T3</div>
+        <div class="weekday">T4</div>
+        <div class="weekday">T5</div>
+        <div class="weekday">T6</div>
+        <div class="weekday">T7</div>
+      </div>
+      <div class="calendar-grid">
+        <div *ngFor="let day of calendarDays" 
+             class="calendar-day" 
+             [ngClass]="{'weekend': day.isWeekend, 'current-day': day.isCurrentDay, 'inactive': !day.isCurrentMonth}">
+          <div class="day-number">{{ day.date }}</div>
+          <div class="day-info" *ngIf="day.info">{{ day.info }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="development-notice">
+      <h2>Đang Phát Triển</h2>
+      <p>Chức năng quản lý chấm công đang trong quá trình phát triển. Sẽ có thêm tính năng mới sớm.</p>
+    </div>
+  </div>
+</div>
